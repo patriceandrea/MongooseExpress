@@ -17,6 +17,8 @@ mongoose.connect('mongodb://localhost:27017/farmStand', { useNewUrlParser: true,
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
+app.use(express.urlencoded({ extended: true }))
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
@@ -30,12 +32,23 @@ app.get('/products', async (req, res) => {
   })
 })
 
+app.get('/products/new', (req, res) => {
+  res.render('products/new')
+})
+
+
 app.get('/products/:id', async (req, res) => {
   const { id } = req.params;
   const product = await Product.findById(id);
   res.render('products/show', { product })
 })
 
+app.post('/products', async (req, res) => {
+  const newProduct = new Product(req.body);
+  console.log(req.body)
+  await newProduct.save();
+  res.send('making your product');
+})
 
 app.listen(3000, () => {
   console.log("APP IS LISTENNING ON 3000");
