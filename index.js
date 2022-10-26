@@ -43,12 +43,24 @@ app.get('/products/:id', async (req, res) => {
   res.render('products/show', { product })
 })
 
+app.get('/products/:id/edit', async (req, res) => {
+  const { id } = req.params;
+  const product = await Product.findById(id);
+  res.render('products/edit', { product })
+})
+
 app.post('/products', async (req, res) => {
   const newProduct = new Product(req.body);
   console.log(newProduct)
   await newProduct.save();
   res.redirect(`/products/${newProduct._id}`)
 })
+
+app.put('/products/:id', async (req, res) => {
+  const product = await Product.findById(id);
+  res.render('products/edit', { product })
+})
+
 
 app.listen(3000, () => {
   console.log("APP IS LISTENNING ON 3000");
