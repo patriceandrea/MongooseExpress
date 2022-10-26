@@ -17,12 +17,16 @@
     <input type="number" id="price" name="price" placeholder="product price" value="<%=product.price%>" />
     <label for="category">Select Category</label>
     <select name="category" id="category">
-      <option value="fruit">fruit</option>
-      <option value="vegetable">vegetable</option>
-      <option value="dairy">dairy</option>
+      <% for(let category of categories){ %>
+        <option value="<%=category%>">
+          <%=category%>
+        </option>
+        <% }%>
     </select>
     <button>Edit</button>
   </form>
+
+  <a href="/products/<%=product._id%>">Cancel</a>
 </body>
 
 </html>
