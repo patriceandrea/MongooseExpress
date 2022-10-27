@@ -62,6 +62,11 @@ app.put('/products/:id', async (req, res) => {
   res.redirect(`/products/${product._id}`)
 })
 
+app.delete('/products/:id', async (req, res) => {
+  const { id } = req.params;
+  const deletedProduct = await Product.findByIdAndDelete(id)
+  res.redirect('/products');
+})
 
 app.listen(3000, () => {
   console.log("APP IS LISTENNING ON 3000");
