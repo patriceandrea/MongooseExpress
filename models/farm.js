@@ -11,7 +11,7 @@ const farmSchema = new Schema({
   },
   email: {
     type: String,
-    required: [true, 'Eamil required']
+    required: [true, 'Email required']
   },
   products: [
     {
@@ -20,3 +20,7 @@ const farmSchema = new Schema({
     }
   ]
 })
+
+const Farm = mongoose.model('Farm', farmSchema);
+
+module.exports = Farm; 
